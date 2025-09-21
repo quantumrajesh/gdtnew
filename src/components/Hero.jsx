@@ -73,12 +73,18 @@ const Hero = () => {
                 </motion.a>
 
                 <motion.button
+                  onClick={() => {
+                    const element = document.querySelector('#portfolio')
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
                   className="px-8 py-4 glass border border-gray-200 text-gray-700 font-semibold rounded-xl flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Play size={20} />
-                  <span>See Our Work</span>
+                  <span>Success Stories</span>
                 </motion.button>
               </motion.div>
 

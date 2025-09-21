@@ -11,7 +11,7 @@ const Navigation = () => {
   const navItems = [
     { name: 'Home', href: '/', isRoute: true },
     { name: 'Services', href: isHomePage ? '#services' : '/#services', isRoute: !isHomePage },
-    { name: 'Portfolio', href: isHomePage ? '#portfolio' : '/#portfolio', isRoute: !isHomePage },
+    { name: 'Success Stories', href: isHomePage ? '#portfolio' : '/#portfolio', isRoute: !isHomePage },
     { name: 'Pricing', href: isHomePage ? '#pricing' : '/#pricing', isRoute: !isHomePage },
     { name: 'Contact', href: isHomePage ? '#contact' : '/#contact', isRoute: !isHomePage }
   ]
@@ -39,12 +39,19 @@ const Navigation = () => {
             {/* Logo */}
             <Link to="/">
               <motion.div
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-3"
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">🦋</span>
-                </div>
+                {/* Replace with your actual logo */}
+                <img 
+                  src="/logo.svg" 
+                  alt="GrowBoost Digital Logo" 
+                  className="h-12 w-12"
+                  onError={(e) => {
+                    // Fallback to PNG if SVG fails
+                    e.target.src = '/logo.png'
+                  }}
+                />
                 <span className="text-xl font-bold text-gray-800">GrowBoost Digital</span>
               </motion.div>
             </Link>
