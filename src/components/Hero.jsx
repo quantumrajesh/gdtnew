@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Play } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
 
 const Hero = () => {
   return (
@@ -56,6 +57,21 @@ const Hero = () => {
                   <ArrowRight size={20} />
                 </motion.button>
 
+                <motion.a
+                  href="https://wa.me/918005504986?text=Hi!%20I%20want%20to%20get%20started%20with%20your%20digital%20marketing%20services"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-green-500 text-white font-semibold rounded-xl flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-green-600"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaWhatsapp size={20} />
+                  <span>Chat on WhatsApp</span>
+                </motion.a>
+
                 <motion.button
                   className="px-8 py-4 glass border border-gray-200 text-gray-700 font-semibold rounded-xl flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
@@ -98,28 +114,36 @@ const Hero = () => {
           >
             <div className="glass-card rounded-3xl p-8 max-w-lg w-full">
               <div className="aspect-square bg-gradient-to-br from-pink-100 to-orange-100 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                {/* Placeholder for 3D illustration */}
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-4xl">🚀</span>
-                  </div>
-                  <p className="text-gray-600 text-sm">
-                    3D Illustration Placeholder
-                    <br />
-                    <span className="text-xs">/public/illustrations/hero.png</span>
-                  </p>
-                </div>
+                {/* 3D Illustration */}
+                <motion.img
+                  src="/illustrations/hero.png"
+                  alt="3D Digital Marketing Illustration"
+                  className="w-full h-full object-contain p-4"
+                  initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  transition={{ duration: 1.2, delay: 0.5 }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    rotateY: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                />
                 
                 {/* Floating elements */}
                 <motion.div
-                  className="absolute top-4 right-4 w-12 h-12 bg-blue-500 rounded-full opacity-20"
+                  className="absolute top-4 right-4 w-12 h-12 bg-blue-500 rounded-full opacity-20 blur-sm"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
                 <motion.div
-                  className="absolute bottom-4 left-4 w-8 h-8 bg-purple-500 rounded-full opacity-30"
+                  className="absolute bottom-4 left-4 w-8 h-8 bg-purple-500 rounded-full opacity-30 blur-sm"
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                />
+                <motion.div
+                  className="absolute top-1/2 left-2 w-6 h-6 bg-pink-400 rounded-full opacity-25 blur-sm"
+                  animate={{ x: [0, 8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: 2 }}
                 />
               </div>
             </div>

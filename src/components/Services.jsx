@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { 
   Facebook, 
   Search, 
@@ -15,37 +16,43 @@ const Services = () => {
       icon: Facebook,
       title: "Facebook & Instagram Ads",
       description: "Targeted ad campaigns that convert visitors into customers",
-      gradient: "from-blue-500 to-purple-600"
+      gradient: "from-blue-500 to-purple-600",
+      link: "/services/facebook-instagram-ads"
     },
     {
       icon: Search,
       title: "Google Ads & GMB Optimization",
       description: "Dominate search results and local listings",
-      gradient: "from-green-500 to-teal-600"
+      gradient: "from-green-500 to-teal-600",
+      link: "/services/google-ads-gmb"
     },
     {
       icon: Globe,
-      title: "WordPress Websites & Landing Pages",
-      description: "Professional websites that drive conversions",
-      gradient: "from-orange-500 to-red-600"
+      title: "Website Development & E-commerce",
+      description: "WordPress, Shopify, and custom-coded websites that drive conversions",
+      gradient: "from-orange-500 to-red-600",
+      link: "/services/website-development"
     },
     {
       icon: Palette,
       title: "AI-Powered Creative Design",
       description: "Stunning visuals that capture your brand essence",
-      gradient: "from-purple-500 to-pink-600"
+      gradient: "from-purple-500 to-pink-600",
+      link: "/services/ai-creative-design"
     },
     {
       icon: Instagram,
       title: "Instagram Branding & Premium Setup",
       description: "Build a premium Instagram presence that stands out",
-      gradient: "from-pink-500 to-rose-600"
+      gradient: "from-pink-500 to-rose-600",
+      link: "/services/instagram-branding"
     },
     {
       icon: TrendingUp,
       title: "SEO & Local Marketing",
       description: "Boost your visibility and attract more customers",
-      gradient: "from-indigo-500 to-blue-600"
+      gradient: "from-indigo-500 to-blue-600",
+      link: "/services/seo-local-marketing"
     }
   ]
 
@@ -122,12 +129,14 @@ const Services = () => {
                     </p>
                   </div>
 
-                  <motion.div
-                    className="flex items-center text-sm font-medium text-transparent bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text cursor-pointer"
-                    whileHover={{ x: 5 }}
-                  >
-                    Learn More →
-                  </motion.div>
+                  <Link to={service.link}>
+                    <motion.div
+                      className="flex items-center text-sm font-medium text-transparent bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text cursor-pointer"
+                      whileHover={{ x: 5 }}
+                    >
+                      Learn More →
+                    </motion.div>
+                  </Link>
                 </motion.div>
               </motion.div>
             )

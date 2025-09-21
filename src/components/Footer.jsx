@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { 
   Mail, 
   Phone, 
@@ -10,6 +11,7 @@ import {
   Linkedin,
   ArrowUp
 } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -25,19 +27,19 @@ const Footer = () => {
   ]
 
   const services = [
-    'Facebook & Instagram Ads',
-    'Google Ads Management',
-    'Website Development',
-    'SEO & Local Marketing',
-    'Brand Design',
-    'Social Media Management'
+    { name: 'Facebook & Instagram Ads', href: '/services/facebook-instagram-ads' },
+    { name: 'Google Ads Management', href: '/services/google-ads-gmb' },
+    { name: 'Website Development', href: '/services/website-development' },
+    { name: 'SEO & Local Marketing', href: '/services/seo-local-marketing' },
+    { name: 'AI Creative Design', href: '/services/ai-creative-design' },
+    { name: 'Instagram Branding', href: '/services/instagram-branding' }
   ]
 
   const socialLinks = [
-    { icon: Facebook, href: '#', color: 'hover:text-blue-600' },
-    { icon: Instagram, href: '#', color: 'hover:text-pink-600' },
-    { icon: Twitter, href: '#', color: 'hover:text-blue-400' },
-    { icon: Linkedin, href: '#', color: 'hover:text-blue-700' }
+    { icon: Facebook, href: 'https://www.facebook.com/growboostdigital', color: 'hover:text-blue-600' },
+    { icon: Instagram, href: 'https://www.instagram.com/growboostdigital/', color: 'hover:text-pink-600' },
+    { icon: Twitter, href: 'https://x.com/rach101201', color: 'hover:text-blue-400' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/rajesh101/', color: 'hover:text-blue-700' }
   ]
 
   return (
@@ -74,7 +76,7 @@ const Footer = () => {
                     whileHover={{ x: 5 }}
                   >
                     <Phone size={18} />
-                    <span>+91 99999 99999</span>
+                    <a href="tel:8005504986" className="hover:text-pink-600 transition-colors">8005504986</a>
                   </motion.div>
                   
                   <motion.div
@@ -82,7 +84,22 @@ const Footer = () => {
                     whileHover={{ x: 5 }}
                   >
                     <Mail size={18} />
-                    <span>hello@growboostdigital.com</span>
+                    <a href="mailto:growboostdigital@gmail.com" className="hover:text-pink-600 transition-colors">growboostdigital@gmail.com</a>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="flex items-center space-x-3 text-gray-600"
+                    whileHover={{ x: 5 }}
+                  >
+                    <FaWhatsapp size={18} />
+                    <a 
+                      href="https://wa.me/918005504986?text=Hi!%20I%20am%20interested%20in%20your%20digital%20marketing%20services" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:text-green-600 transition-colors"
+                    >
+                      WhatsApp Chat
+                    </a>
                   </motion.div>
                   
                   <motion.div
@@ -90,7 +107,7 @@ const Footer = () => {
                     whileHover={{ x: 5 }}
                   >
                     <MapPin size={18} />
-                    <span>Mumbai, Maharashtra, India</span>
+                    <span>Johari Bazar, Jaipur</span>
                   </motion.div>
                 </div>
               </motion.div>
@@ -127,12 +144,17 @@ const Footer = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-6">Our Services</h3>
                 <div className="space-y-3">
                   {services.map((service, index) => (
-                    <motion.div
-                      key={index}
-                      className="text-gray-600 hover:text-pink-600 transition-colors cursor-pointer"
-                      whileHover={{ x: 5 }}
-                    >
-                      {service}
+                    <motion.div key={index}>
+                      <Link
+                        to={service.href}
+                        className="block text-gray-600 hover:text-pink-600 transition-colors"
+                      >
+                        <motion.div
+                          whileHover={{ x: 5 }}
+                        >
+                          {service.name}
+                        </motion.div>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
@@ -177,6 +199,8 @@ const Footer = () => {
                         <motion.a
                           key={index}
                           href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className={`w-10 h-10 glass border border-gray-200 rounded-lg flex items-center justify-center text-gray-600 ${social.color} transition-all duration-300`}
                           whileHover={{ scale: 1.1, y: -2 }}
                           whileTap={{ scale: 0.95 }}
@@ -210,9 +234,9 @@ const Footer = () => {
               viewport={{ once: true }}
               className="flex items-center space-x-6 text-sm text-gray-600"
             >
-              <a href="#" className="hover:text-pink-600 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-pink-600 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-pink-600 transition-colors">Cookie Policy</a>
+              <Link to="/privacy-policy" className="hover:text-pink-600 transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="hover:text-pink-600 transition-colors">Terms of Service</Link>
+              <Link to="/cookie-policy" className="hover:text-pink-600 transition-colors">Cookie Policy</Link>
             </motion.div>
           </div>
         </div>

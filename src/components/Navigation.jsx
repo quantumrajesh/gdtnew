@@ -1,17 +1,31 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '/', isRoute: true },
+    { name: 'Services', href: isHomePage ? '#services' : '/#services', isRoute: !isHomePage },
+    { name: 'Portfolio', href: isHomePage ? '#portfolio' : '/#portfolio', isRoute: !isHomePage },
+    { name: 'Pricing', href: isHomePage ? '#pricing' : '/#pricing', isRoute: !isHomePage },
+    { name: 'Contact', href: isHomePage ? '#contact' : '/#contact', isRoute: !isHomePage }
   ]
+
+  const handleNavClick = (item) => {
+    if (isHomePage && !item.isRoute) {
+      // Smooth scroll for home page navigation
+      const element = document.querySelector(item.href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    setIsOpen(false)
+  }
 
   return (
     <motion.nav
@@ -23,28 +37,48 @@ const Navigation = () => {
         <div className="glass-card rounded-2xl px-6 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <motion.div
-              className="flex items-center space-x-2"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">🦋</span>
-              </div>
-              <span className="text-xl font-bold text-gray-800">GrowBoost Digital</span>
-            </motion.div>
+            <Link to="/">
+              <motion.div
+                className="flex items-center space-x-2"
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">🦋</span>
+                </div>
+                <span className="text-xl font-bold text-gray-800">GrowBoost Digital</span>
+              </motion.div>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
-                </motion.a>
+                item.isRoute ? (
+                  <Link key={item.name} to={item.href}>
+                    <motion.span
+                      className="text-gray-700 hover:text-gray-900 font-medium transition-colors cursor-pointer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item.name}
+                    </motion.span>
+                  </Link>
+                ) : (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={(e) => {
+                      if (isHomePage) {
+                        e.preventDefault()
+                        handleNavClick(item)
+                      }
+                    }}
+                  >
+                    {item.name}
+                  </motion.a>
+                )
               ))}
             </div>
 
@@ -85,14 +119,29 @@ const Navigation = () => {
             >
               <div className="flex flex-col space-y-4">
                 {navItems.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-gray-700 hover:text-gray-900 font-medium"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.name}
-                  </a>
+                  item.isRoute ? (
+                    <Link key={item.name} to={item.href} onClick={() => setIsOpen(false)}>
+                      <span className="text-gray-700 hover:text-gray-900 font-medium">
+                        {item.name}
+                      </span>
+                    </Link>
+                  ) : (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="text-gray-700 hover:text-gray-900 font-medium"
+                      onClick={(e) => {
+                        if (isHomePage) {
+                          e.preventDefault()
+                          handleNavClick(item)
+                        } else {
+                          setIsOpen(false)
+                        }
+                      }}
+                    >
+                      {item.name}
+                    </a>
+                  )
                 ))}
                 <div className="flex flex-col space-y-2 pt-4">
                   <button className="text-left text-gray-700 font-medium">Sign In</button>
